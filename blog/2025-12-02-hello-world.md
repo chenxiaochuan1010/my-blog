@@ -10,6 +10,8 @@ date: 2025-12-02
 
 This is my very first post on my new Docusaurus site.
 
+<!-- truncate-->
+
 ## Why I moved
 I wanted a site that is fast and easy to customize.
 
