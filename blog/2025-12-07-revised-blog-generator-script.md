@@ -1,0 +1,62 @@
+---
+title: "Revised Blog Generator Script"
+date: 2025-12-07
+authors: [me]
+tags: []
+---
+
+<!--Write your intro here...-->
+Using my night spare time in the past one week, with the help of Gemini3, I've sucessfully deployed my blog on **Github Pages**. 
+<!--Contents after this line will be hiden, unless 'Read More' button been pressed.-->
+
+<!--truncate-->
+Meanwhile, all posts from my previous blog are migrated here. I've built a script to make the process of writing blogs easier.
+
+```js title="new.js"
+const fs = require('fs');
+const path = require('path');
+const { spawn } = require('child_process');
+
+// 1. Get the title from command line arguments
+const args = process.argv.slice(2);
+const title = args.join(' ') || 'New Post';
+
+// 2. Generate Dates and Filenames
+const date = new Date();
+const yyyy = date.getFullYear();
+const mm = String(date.getMonth() + 1).padStart(2, '0');
+const dd = String(date.getDate()).padStart(2, '0');
+const dateStr = `${yyyy}-${mm}-${dd}`;
+
+// Create a safe filename (e.g., "2025-12-06-my-post-title.md")
+const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const filename = `${dateStr}-${slug}.md`;
+const filePath = path.join('./blog', filename);
+
+// 3. The Template Content
+const content = `---
+title: "${title}"
+date: ${dateStr}
+author: "[me]"
+tags: []
+---
+
+Write your intro here...
+
+## Section 1
+
+`;
+
+// 4. Write file and open Neovim
+fs.writeFile(filePath, content, (err) => {
+    if (err) return console.error(err);
+    console.log(`Created: ${filePath}`);
+    
+    // Spawn Neovim with 'inherit' to take over the terminal correctly
+    const editor = spawn('nvim', [filePath], { stdio: 'inherit' });
+
+    editor.on('close', (code) => {
+        console.log(`Finished editing.`);
+    });
+});
+```
