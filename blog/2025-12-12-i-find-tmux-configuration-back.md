@@ -8,7 +8,7 @@ tags: [neovim, tmux, productivity, terminal]
 If you are like me, you’ve probably looked at your terminal setup and wondered: "Why do I have three different ways to split my screen?"
 
 iTerm2 can split panes. Tmux can split panes. Neovim can split panes.
-<!--truncate---->
+<!--truncate-->
 ![plugins-setup](../static/img/2025-12-12-10-34-28.png)
 
 For a long time, I just used iTerm2 splits because they were easy. But recently, I dusted off my old Tmux configuration to build a more robust development environment. The problem? My muscle memory was suffering. I’d use Ctrl+w to move around in Vim, but then have to reach for a clumsy Tmux prefix just to check a server log in the pane next door.
