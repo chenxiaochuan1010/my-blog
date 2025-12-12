@@ -29,7 +29,7 @@ The goal is simple: I want to use Ctrl + h/j/k/l to move my cursor. If I'm in a 
 
 Here is how I set it up.
 
-# 1. The Tmux Config (~/.tmux.conf)
+## 1. The Tmux Config (~/.tmux.conf)
 I overhauled my old config to be more modern. I switched the prefix to Ctrl+a (easier on the pinky) and added the magic "is_vim" check.
 
 ```Bash
@@ -57,14 +57,14 @@ bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
 bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
 bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
 ```
-# 2. The Neovim Config
+## 2. The Neovim Config
 Since I'm using Packer, adding the plugin was trivial. I just added this line to my plugins-setup.lua and let the auto-command handle the installation:
 
 ```Lua
 -- plugins-setup.lua
 use("christoomey/vim-tmux-navigator")
 ```
-# The Result
+## The Result
 After sourcing the configs and running `PackerSync` the friction is completely gone.
 
 I can have Neovim on the left and my server logs on the right. I press `Ctrl+l`, and my cursor flies from the code to the logs. I press `Ctrl+h`, and I'm back editing. No prefix keys, no context switching—just flow.
