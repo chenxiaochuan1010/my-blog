@@ -14,7 +14,11 @@ const dd = String(date.getDate()).padStart(2, '0');
 const dateStr = `${yyyy}-${mm}-${dd}`;
 
 // Create a safe filename (e.g., "2025-12-06-my-post-title.md")
-const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Support Chinese/Unicode by only removing unsafe chars and replacing spaces
+const slug = title.toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[\\/:*?"<>|]/g, '')
+    .replace(/^-+|-+$/g, '') || 'untitled';
 const filename = `${dateStr}-${slug}.md`;
 const filePath = path.join('./blog', filename);
 
